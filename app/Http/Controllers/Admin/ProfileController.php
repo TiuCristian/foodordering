@@ -10,9 +10,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Traits\FileUploadTrait;
 
 class ProfileController extends Controller
 {
+    use FileUploadTrait;
     public function index(): View
     {
         return view('admin.profile.index');
@@ -20,10 +22,11 @@ class ProfileController extends Controller
 
     public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
     {
-
+        $imagePath = $this->uploadImage($request, 'avatar');
         // $user = $request->user();          // current auth user
         $user = Auth::user();          // current auth user
         $user->fill($request->only('name', 'email'));
+        $user->avatar = isset($imagePath) ? $imagePath : $user->avatar;
         $user->save();
 
         toastr('Updated successfuly!', 'success');
