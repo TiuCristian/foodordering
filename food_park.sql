@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 19, 2025 at 11:35 AM
+-- Generation Time: Sep 19, 2025 at 11:49 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -169,8 +169,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `avatar`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '/uploads/default_user.jpg', 'Admin', 'tiucrs@gmail.com', 'admin', '2025-09-19 11:05:10', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36K6ih8t7Z3YyRrhF9nFJj2', NULL, '2025-09-19 11:05:10', '2025-09-19 11:05:10'),
-(2, '/uploads/media_68cd3fc7ddfd2.png', 'User', 'tiugeorgecristian@gmail.com', 'user', '2025-09-19 11:05:10', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36K6ih8t7Z3YyRrhF9nFJj2', NULL, '2025-09-19 11:05:10', '2025-09-19 08:34:31');
+(1, '/uploads/default_user.jpg', 'Admin', 'tiucrs@gmail.com', 'admin', '2025-09-19 11:05:10', '$2y$10$CiW4BdpLEsB6bG0cxUa5AeoJpx6TcjfA.xBpnbW13LYRvYJGPtbX6', NULL, '2025-09-19 11:05:10', '2025-09-19 11:05:10'),
+(2, '/uploads/media_68cd40aebb7c7.jpg', 'User', 'tiugeorgecristian@gmail.com', 'user', '2025-09-19 11:05:10', '$2y$10$h8fL/Uu4lvye7o6f90/b7e7SR5nY/uDb6Zc4AaEkuDx4F1yP9kV5O', NULL, '2025-09-19 11:05:10', '2025-09-19 08:38:22');
 
 --
 -- Indexes for dumped tables
