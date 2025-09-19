@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 18, 2025 at 01:06 PM
+-- Generation Time: Sep 19, 2025 at 11:35 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -20,6 +20,59 @@ SET time_zone = "+00:00";
 --
 -- Database: `food_park`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addresses`
+--
+
+CREATE TABLE `addresses` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `delivery_area_id` bigint UNSIGNED NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `addresses`
+--
+
+INSERT INTO `addresses` (`id`, `user_id`, `delivery_area_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `type`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 'Ion', 'Popa', 'popaion@gmail.com', '0788999555', 'Strada test nr. 200', 'home', '2025-09-19 08:22:42', '2025-09-19 08:22:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_areas`
+--
+
+CREATE TABLE `delivery_areas` (
+  `id` bigint UNSIGNED NOT NULL,
+  `area_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `min_delivery_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_delivery_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `delivery_fee` double NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `delivery_areas`
+--
+
+INSERT INTO `delivery_areas` (`id`, `area_name`, `min_delivery_time`, `max_delivery_time`, `delivery_fee`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Downtown', '15', '30', 0, 1, '2025-09-19 11:21:57', '2025-09-19 11:21:57'),
+(2, 'North Side', '20', '45', 7.5, 1, '2025-09-19 11:21:57', '2025-09-19 11:21:57'),
+(3, 'South Side', '25', '50', 5, 1, '2025-09-19 11:21:57', '2025-09-19 11:21:57');
 
 -- --------------------------------------------------------
 
@@ -57,7 +110,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2025_09_19_103006_create_delivery_areas_table', 1),
+(6, '2025_09_19_105030_create_addresses_table', 1);
 
 -- --------------------------------------------------------
 
@@ -70,13 +125,6 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `password_reset_tokens`
---
-
-INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
-('tiucrs@gmail.com', '$2y$12$M3DaleFqsSnEYmR.e5.kvO8tnABiNxR704V.sOFJlKnl.agWuTiO6', '2025-09-17 09:32:01');
 
 -- --------------------------------------------------------
 
@@ -121,13 +169,26 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `avatar`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '/uploads/default_user.jpg', 'Admin', 'tiucrs@gmail.com', 'admin', NULL, '$2y$12$lTSCZ8HG3fAGbjHcAGeIEOmcgza0SiVq/VKvZUxSL2ZaONmlLn8qy', 'Krt7LpHfKZNh42IpGfclSs3V3QmU5U82dEnAIFIe1qtKo2hQxFfO2qOtEIBf', '2025-09-16 08:52:56', '2025-09-18 09:44:27'),
-(2, '/uploads/default_user.jpg', 'User', 'tiugeorgecristian@gmail.com', 'user', NULL, '$2y$10$2OXoQHrs67kC7Zduf1UDe.BDNrsfzKWPzXHzzqEm5ZNo3B3xxwT02', NULL, '2025-09-16 08:52:56', '2025-09-16 08:52:56'),
-(4, '/uploads/default_user.jpg', 'Popescu Ion', 'popion@gmail.com', 'user', NULL, '$2y$12$qONvMK9Oh/Q41qKoCbVxYOdO8fPoAGlAtAFJfohv2FSLY6vu6vuS.', NULL, '2025-09-17 08:22:34', '2025-09-17 08:22:34');
+(1, '/uploads/default_user.jpg', 'Admin', 'tiucrs@gmail.com', 'admin', '2025-09-19 11:05:10', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36K6ih8t7Z3YyRrhF9nFJj2', NULL, '2025-09-19 11:05:10', '2025-09-19 11:05:10'),
+(2, '/uploads/media_68cd3fc7ddfd2.png', 'User', 'tiugeorgecristian@gmail.com', 'user', '2025-09-19 11:05:10', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36K6ih8t7Z3YyRrhF9nFJj2', NULL, '2025-09-19 11:05:10', '2025-09-19 08:34:31');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `addresses_user_id_foreign` (`user_id`),
+  ADD KEY `addresses_delivery_area_id_foreign` (`delivery_area_id`);
+
+--
+-- Indexes for table `delivery_areas`
+--
+ALTER TABLE `delivery_areas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -168,6 +229,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `delivery_areas`
+--
+ALTER TABLE `delivery_areas`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -177,7 +250,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -189,7 +262,18 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD CONSTRAINT `addresses_delivery_area_id_foreign` FOREIGN KEY (`delivery_area_id`) REFERENCES `delivery_areas` (`id`),
+  ADD CONSTRAINT `addresses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
