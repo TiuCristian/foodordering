@@ -38,8 +38,7 @@ class UserProfileController extends Controller
         return redirect()->back();
     }
 
-    function updateAvatar(Request $request)
-    {
+    function updateAvatar(Request $request) {
         /** handle image file */
         $imagePath = $this->uploadImage($request, 'avatar');
 

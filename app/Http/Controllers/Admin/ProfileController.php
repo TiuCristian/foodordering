@@ -23,7 +23,6 @@ class ProfileController extends Controller
     public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
     {
         $imagePath = $this->uploadImage($request, 'avatar');
-        // $user = $request->user();          // current auth user
         $user = Auth::user();          // current auth user
         $user->fill($request->only('name', 'email'));
         $user->avatar = isset($imagePath) ? $imagePath : $user->avatar;

@@ -7,7 +7,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
 
-use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
@@ -28,23 +28,23 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 // Regular user dashboard
 Route::get('/dashboard', fn() => view('dashboard'))->middleware('auth')->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::put('profile', [UserProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::get('dashboard',        [DashboardController::class, 'index'])->name('dashboard');
+    Route::put('profile',          [UserProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [UserProfileController::class, 'updatePassword'])->name('profile.password.update');
-    Route::post('profile/avatar', [UserProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
-    Route::put('profile', [UserProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('profile/avatar',  [UserProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+    Route::put('profile',          [UserProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [UserProfileController::class, 'updatePassword'])->name('profile.password.update');
-    Route::post('address', [DashboardController::class, 'createAddress'])->name('address.store');
-    Route::put('address/{id}/edit', [DashboardController::class, 'updateAddress'])->name('address.update');
-    Route::delete('address/{id}', [DashboardController::class, 'destroyAddress'])->name('address.destroy');
+    Route::post('address',         [DashboardController::class, 'createAddress'])->name('address.store');
+    Route::put('address/{id}/edit',[DashboardController::class, 'updateAddress'])->name('address.update');
+    Route::delete('address/{id}',  [DashboardController::class, 'destroyAddress'])->name('address.destroy');
 });
 
 require __DIR__ . '/auth.php';
