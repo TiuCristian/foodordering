@@ -19,17 +19,48 @@ class SliderDataTable extends DataTable
      *
      * @param QueryBuilder $query Results from query() method.
      */
+    // public function dataTable(QueryBuilder $query): EloquentDataTable
+    // {
+    //     return (new EloquentDataTable($query))
+    //         ->addColumn('action', function ($query) {
+    //             $edit = "<a href='" . route('slider.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
+    //             $delete = "<a href='" . route('slider.destroy', $query->id) . "' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
+
+    //             return $edit . $delete;
+    //         })->addColumn('image', function ($query) {
+    //             return '<img width="100px" src="' . asset($query->image) . '">';
+    //         })->addColumn('status', function ($query) {
+    //             if ($query->status === 1) {
+    //                 return '<span class="badge badge-primary">Active</span>';
+    //             } else {
+    //                 return '<span class="badge badge-danger">InActive</span>';
+    //             }
+    //         })
+    //         ->rawColumns(['image', 'action', 'status'])
+    //         ->setRowId('id');
+    // }
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $edit = "<a href='" . route('admin.slider.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
-                $delete = "<a href='" . route('admin.slider.destroy', $query->id) . "' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
+                $edit = "<a href='" . route('slider.edit', $query->id) . "' class='btn btn-primary' title='Edit'><i class='fas fa-edit'></i></a>";
+
+
+                $delete = "<form method='POST' action='" . route('slider.destroy', $query->id) . "' style='display:inline-block; margin-left:6px;' onsubmit=\"return confirm('Are you sure you want to delete this slider?');\">"
+                    . csrf_field()
+                    . method_field('DELETE')
+                    . "<button type='submit' class='btn btn-danger' title='Delete'><i class='fas fa-trash'></i></button>"
+                    . "</form>";
+
 
                 return $edit . $delete;
-            })->addColumn('image', function ($query) {
-                return '<img width="100px" src="' . asset($query->image) . '">';
-            })->addColumn('status', function ($query) {
+            })
+            ->addColumn('image', function ($query) {
+                $src = $query->image ? asset($query->image) : '';
+                return '<img width="100px" src="' . $src . '">';
+            })
+            ->addColumn('status', function ($query) {
                 if ($query->status === 1) {
                     return '<span class="badge badge-primary">Active</span>';
                 } else {
