@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
-
+use App\Models\Slider;
 
 class FrontendController extends Controller
 {
     //
     function index() : View {
-        return view('frontend.home.index');
+        $sliders = Slider::where('status', 1)->get();
+        return view('frontend.home.index', compact('sliders'));
     }
 }

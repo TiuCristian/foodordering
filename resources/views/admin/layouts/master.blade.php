@@ -13,6 +13,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/assets/css/components.css') }}">
+  <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
 
 <body>
   <div id="app">
@@ -45,11 +46,12 @@
   <script src="{{ asset('admin/assets/js/stisla.js') }}"></script>
   <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
   <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
+  <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
 
 
   <!-- Template JS File -->
   <script src="{{ asset('admin/assets/js/scripts.js') }}"></script>
-  <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
+  <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
   
     <!--main/custom js-->

@@ -4,7 +4,6 @@
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
           </ul>
-         
         </form>
         <ul class="navbar-nav navbar-right">
     <li class="dropdown"><a href="#" data-toggle="dropdown"
@@ -48,6 +47,12 @@
             <li class="menu-header">Dashboard</li>
                 <li class=active><a class="nav-link" href="index-0.html">General Dashboard</a></li>
             <li class="menu-header">Starter</li>
+            <li>
+              <a class="nav-link" href="{{ route('slider.index') }}">
+               
+                <span>Slider</span>
+              </a>
+            </li>
             {{-- <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
               <ul class="dropdown-menu">
