@@ -76,6 +76,6 @@
                 $('.button-click').click();
             })
         </script>
-
+        @stack('scripts')
 </body>
 </html>
