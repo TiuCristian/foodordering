@@ -40,7 +40,7 @@ class WhyChooseUsController extends Controller
 
         toastr()->success('Created Successfully');
 
-        return to_route('admin.why-choose-us.index');
+        return to_route('why-choose-us.index');
     }
 
 
@@ -63,7 +63,7 @@ class WhyChooseUsController extends Controller
 
         toastr()->success('Created Successfully');
 
-        return to_route('admin.why-choose-us.index');
+        return to_route('why-choose-us.index');
     }
 
     public function updateTitle(Request $request)

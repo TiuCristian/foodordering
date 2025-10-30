@@ -40,6 +40,7 @@ Route::get('/dashboard', fn() => view('dashboard'))->middleware('auth')->name('d
 
 
 Route::group(['middleware' => 'auth'], function () {
+    
     Route::get('dashboard',        [DashboardController::class, 'index'])->name('dashboard');
     Route::put('profile',          [UserProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [UserProfileController::class, 'updatePassword'])->name('profile.password.update');
@@ -51,9 +52,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('address/{id}',  [DashboardController::class, 'destroyAddress'])->name('address.destroy');
 
     Route::resource('slider', SliderController::class);
-    
+
     Route::resource('why-choose-us', WhyChooseUsController::class);
-    Route::put('why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])->name('why-choose-title.update');
+    // Route::put('why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])->name('why-choose-title.update');
+    Route::match(['get', 'put'], 'why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])
+        ->name('why-choose-title.update');
 });
 
 require __DIR__ . '/auth.php';

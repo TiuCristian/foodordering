@@ -15,7 +15,8 @@
                             <h4>Why Choose Us Section Titles..</h4>
                         </div>
                         <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
-                            <form action="{{ route('why-choose-title.update') }}" method="POST">
+                          e.up  
+                          <form action="{{ route('why-choose-title.update') }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
@@ -58,6 +59,10 @@
     </section>
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush --}}
+
+@push('scripts')
+    {{ $dataTable->scripts() }}
 @endpush
