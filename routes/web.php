@@ -4,9 +4,11 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
+
 
 
 // use App\Http\Controllers\ProfileController;
@@ -50,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('slider', SliderController::class);
     
+    Route::resource('why-choose-us', WhyChooseUsController::class);
+    Route::put('why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])->name('why-choose-title.update');
 });
 
 require __DIR__ . '/auth.php';

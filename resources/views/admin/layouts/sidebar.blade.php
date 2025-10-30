@@ -45,12 +45,16 @@
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-                <li class=active><a class="nav-link" href="index-0.html">General Dashboard</a></li>
+                <li class=active><a class="nav-link" href="/admin/dashboard">General Dashboard</a></li>
             <li class="menu-header">Starter</li>
             <li>
               <a class="nav-link" href="{{ route('slider.index') }}">
-               
                 <span>Slider</span>
+              </a>
+            </li>
+              <li>
+              <a class="nav-link" href="{{ route('why-choose-us.index') }}">
+                <span>Why Choose Us</span>
               </a>
             </li>
             {{-- <li class="dropdown">
