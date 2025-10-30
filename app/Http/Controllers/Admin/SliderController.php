@@ -92,7 +92,7 @@ class SliderController extends Controller
 
         toastr()->success('Updated Successfully');
 
-        return to_route('admin.slider.index');
+        return to_route('slider.index');
     }
 
     /**
