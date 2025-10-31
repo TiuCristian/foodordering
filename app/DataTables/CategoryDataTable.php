@@ -28,14 +28,14 @@ class CategoryDataTable extends DataTable
 
             //     return $edit . $delete;
             // })
-            ->addColumn('action', function ($query) {
-                $edit = "<a href='" . route('category.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
+                ->addColumn('action', function ($query) {
+                    $edit = "<a href='" . route('category.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
 
-                $delete = "<form action='" . route('category.destroy', $query->id) . "' method='POST' style='display:inline-block' onsubmit='return confirm(\"Delete this category?\")'>
-        " . csrf_field() . "
-        " . method_field('DELETE') . "
-        <button type='submit' class='btn btn-danger ml-2'><i class='fas fa-trash'></i></button>
-    </form>";
+                    $delete = "<form action='" . route('category.destroy', $query->id) . "' method='POST' style='display:inline-block' onsubmit='return confirm(\"Delete this category?\")'>
+            " . csrf_field() . "
+            " . method_field('DELETE') . "
+            <button type='submit' class='btn btn-danger ml-2'><i class='fas fa-trash'></i></button>
+        </form>";
 
                 return $edit . $delete;
             })

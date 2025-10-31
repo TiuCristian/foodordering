@@ -61,6 +61,7 @@
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Restaurant</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('category.index') }}">Product Category</a></li>
+                <li><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
               </ul>
             </li>
             {{-- <li class="dropdown">
