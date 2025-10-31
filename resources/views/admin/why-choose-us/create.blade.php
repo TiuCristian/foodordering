@@ -9,7 +9,6 @@
     <div class="card card-primary">
         <div class="card-header">
             <h4>Create Item</h4>
-
         </div>
         <div class="card-body">
             <form action="{{ route('why-choose-us.store') }}" method="POST" enctype="multipart/form-data">

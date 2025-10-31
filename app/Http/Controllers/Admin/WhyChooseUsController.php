@@ -37,9 +37,8 @@ class WhyChooseUsController extends Controller
     public function store(WhyChooseUsCreateRequest $request): RedirectResponse
     {
         WhyChooseUs::create($request->validated());
-
+        
         toastr()->success('Created Successfully');
-
         return to_route('why-choose-us.index');
     }
 

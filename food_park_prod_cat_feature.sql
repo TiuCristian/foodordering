@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 30, 2025 at 01:25 PM
+-- Generation Time: Oct 31, 2025 at 09:45 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -48,6 +48,32 @@ CREATE TABLE `addresses` (
 INSERT INTO `addresses` (`id`, `user_id`, `delivery_area_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `type`, `created_at`, `updated_at`) VALUES
 (1, 2, 1, 'Ion', 'Popa', 'popaion@gmail.com', '0788999555', 'Strada test nr. 204', 'home', '2025-09-19 08:22:42', '2025-09-19 10:20:39'),
 (2, 2, 2, 'Ion', 'Popa', 'popaionwork@gmail.com', '0788999555', 'street work address test nr. 203', 'office', '2025-09-19 10:16:42', '2025-09-19 10:16:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `show_at_home` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `slug`, `status`, `show_at_home`, `created_at`, `updated_at`) VALUES
+(1, 'Burger', 'burger', 1, 1, NULL, NULL),
+(2, 'Sandwich', 'sandwich', 1, 1, NULL, NULL),
+(3, 'Taco', 'taco', 1, 1, NULL, NULL),
+(7, 'Stacy Emmerson', 'stacy-emmerson', 0, 0, '2025-10-31 07:44:24', '2025-10-31 07:44:24');
 
 -- --------------------------------------------------------
 
@@ -116,7 +142,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2025_09_19_105030_create_addresses_table', 1),
 (7, '2025_10_14_074346_create_sliders_table', 2),
 (10, '2025_10_30_101420_create_why_choose_us_table', 3),
-(11, '2025_10_30_101628_create_section_titles_table', 3);
+(11, '2025_10_30_101628_create_section_titles_table', 3),
+(12, '2025_10_31_082919_create_categories_table', 4);
 
 -- --------------------------------------------------------
 
@@ -203,7 +230,7 @@ CREATE TABLE `sliders` (
 --
 
 INSERT INTO `sliders` (`id`, `image`, `offer`, `title`, `sub_title`, `short_description`, `button_link`, `status`, `created_at`, `updated_at`) VALUES
-(5, '/uploads/media_6903365f30381.jpg', '35', 'Eat healthy. Stay healthy.', 'Fast Food & Restaurants', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum fugit minima\r\n                                            et debitis ut distinctio optio qui voluptate natus.', 'Shop Now', 1, '2025-10-30 07:41:54', '2025-10-30 07:58:33'),
+(5, '/uploads/media_6903365f30381.jpg', '35%', 'Eat healthy. Stay healthy.', 'Fast Food & Restaurants', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum fugit minima\r\n                                            et debitis ut distinctio optio qui voluptate natus.', 'Shop Now', 1, '2025-10-30 07:41:54', '2025-10-30 11:27:55'),
 (6, '/uploads/media_6903332aaa9a1.jpg', '35%', 'Different spice for a Different taste', 'Fast Food & Restaurants', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum fugit minima\r\n                                            et debitis ut distinctio optio qui voluptate natus.', 'shop now', 1, '2025-10-30 07:43:06', '2025-10-30 11:20:17');
 
 -- --------------------------------------------------------
@@ -255,8 +282,8 @@ CREATE TABLE `why_choose_us` (
 
 INSERT INTO `why_choose_us` (`id`, `icon`, `title`, `short_description`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'fas fa-percent', 'discount voucher', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, debitis expedita .', 1, '2025-10-30 10:55:58', '2025-10-30 11:17:55'),
-(2, 'fab fa-angrycreative', 'fresh healthy foods', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, debitis expedita .', 1, '2025-10-30 11:18:45', '2025-10-30 11:18:45'),
-(3, 'fab fa-snapchat', 'fast serve on table', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, debitis expedita .', 1, '2025-10-30 11:19:35', '2025-10-30 11:19:35');
+(2, 'fas fa-award', 'fresh healthy foods', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, debitis expedita .', 1, '2025-10-30 11:18:45', '2025-10-30 11:33:11'),
+(3, 'fas fa-shipping-fast', 'fast serve on table', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, debitis expedita .', 1, '2025-10-30 11:19:35', '2025-10-30 11:33:53');
 
 --
 -- Indexes for dumped tables
@@ -269,6 +296,12 @@ ALTER TABLE `addresses`
   ADD PRIMARY KEY (`id`),
   ADD KEY `addresses_user_id_foreign` (`user_id`),
   ADD KEY `addresses_delivery_area_id_foreign` (`delivery_area_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `delivery_areas`
@@ -339,6 +372,12 @@ ALTER TABLE `addresses`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `delivery_areas`
 --
 ALTER TABLE `delivery_areas`
@@ -354,7 +393,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

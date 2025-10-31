@@ -48,7 +48,7 @@
   <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
   <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
   <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
+  <script src="{{ asset('admin/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
 
 
   <!-- Template JS File -->
@@ -78,6 +78,61 @@
                 $('.button-click').click();
             })
         </script>
+
+        <script>
+        $.uploadPreview({
+            input_field: "#image-upload", // Default: .image-upload
+            preview_box: "#image-preview", // Default: .image-preview
+            label_field: "#image-label", // Default: .image-label
+            label_default: "Choose File", // Default: Choose File
+            label_selected: "Change File", // Default: Change File
+            no_label: false, // Default: false
+            success_callback: null // Default: null
+        });
+
+        $(document).ready(function() {
+
+            $('body').on('click', '.delete-item', function(e) {
+                e.preventDefault()
+
+                let url = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            data: {_token: "{{ csrf_token() }}"},
+                            success: function(response) {
+                                if(response.status === 'success'){
+                                    toastr.success(response.message)
+
+                                    window.location.reload();
+
+                                }else if(response.status === 'error'){
+                                    toastr.error(response.message)
+                                }
+                            },
+                            error: function(error) {
+                                console.error(error);
+                            }
+                        })
+                    }
+                })
+            })
+
+        })
+
+    </script>
         @stack('scripts')
 </body>
 </html>

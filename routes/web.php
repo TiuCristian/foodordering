@@ -3,16 +3,19 @@
 // routes/web.php
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
-
-
-
 // use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
+
+
+
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
@@ -57,6 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::put('why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])->name('why-choose-title.update');
     Route::match(['get', 'put'], 'why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])
         ->name('why-choose-title.update');
+
+
+    //Product Cat Routes
+    Route::resource('category', CategoryController::class);
 });
 
 require __DIR__ . '/auth.php';
