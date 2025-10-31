@@ -23,25 +23,39 @@ class ProductDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $edit = "<a href='" . route('product.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
 
-            $delete = "<form action='" . route('product.destroy', $query->id) . "' method='POST' style='display:inline-block' onsubmit='return confirm(\"Delete this product?\")'>
-            " . csrf_field() . "
-            " . method_field('DELETE') . "
-            <button type='submit' class='btn btn-danger ml-2'><i class='fas fa-trash'></i></button>
-        </form>";
-                // $delete = "<a href='" . route('product.destroy', $query->id) . "' class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>";
+                $edit = "<a href='" . route('product.edit', $query->id) . "' class='btn btn-primary btn-sm'>
+                <i class='fas fa-edit'></i>
+             </a>";
 
-                $more = '<div class="btn-group dropleft">
-                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
-                <div class="dropdown-menu dropleft" x-placement="left-start" style="position: absolute; transform: translate3d(-2px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                $delete = "<form action='" . route('product.destroy', $query->id) . "'
+                    method='POST'
+                    onsubmit='return confirm(\"Delete this product?\")'
+                    class='d-inline'>
+                    " . csrf_field() . "
+                    " . method_field('DELETE') . "
+                    <button type='submit' class='btn btn-danger btn-sm'>
+                        <i class='fas fa-trash'></i>
+                    </button>
+               </form>";
+
+                $more = '<div class="btn-group dropleft d-inline">
+                <button type="button" class="btn btn-dark btn-sm dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">Product Gallery</a>
                   <a class="dropdown-item" href="#">Product Variants</a>
                 </div>
-              </div>';
+             </div>';
 
-                return $edit . $delete . $more;
+                // wrap everything in flex so they stay on one line
+                return "<div class='d-flex align-items-center gap-1' style='gap: .35rem;'>"
+                    . $edit . $delete . $more .
+                    "</div>";
             })
+
             ->addColumn('price', function ($query) {
                 return currencyPosition($query->price);
             })
