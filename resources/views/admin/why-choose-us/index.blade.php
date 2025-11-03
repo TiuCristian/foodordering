@@ -64,5 +64,6 @@
 @endpush --}}
 
 @push('scripts')
-    {{ $dataTable->scripts() }}
+    {{-- {{ $dataTable->scripts() }} --}}
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 @endpush

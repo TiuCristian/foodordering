@@ -27,7 +27,7 @@
 
   
 
-    <script>
+    {{-- <script>
         document.addEventListener('click', function (e) {
             if (e.target.closest('.delete-item')) {
                 const btn = e.target.closest('.delete-item');
@@ -54,6 +54,6 @@
                 .catch(() => alert('Request failed'));
             }
         });
-    </script>
+    </script> --}}
 @endpush
 

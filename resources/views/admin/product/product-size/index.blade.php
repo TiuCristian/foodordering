@@ -132,7 +132,8 @@
                                         <td>{{ currencyPosition($option->price) }}</td>
                                         <td>
                                             <a href='{{ route('product-option.destroy', $option->id) }}'
-                                                class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>
+                                                class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

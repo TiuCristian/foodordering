@@ -45,12 +45,13 @@ class SliderDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
                 $edit = "<a href='" . route('slider.edit', $query->id) . "' class='btn btn-primary' title='Edit'><i class='fas fa-edit'></i></a>";
+            $delete = "<a href='" . route('slider.destroy', $query->id) . "' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
 
-                $delete = "<form method='POST' action='" . route('slider.destroy', $query->id) . "' style='display:inline-block; margin-left:6px;' onsubmit=\"return confirm('Are you sure you want to delete this slider?');\">"
-                    . csrf_field()
-                    . method_field('DELETE')
-                    . "<button type='submit' class='btn btn-danger' title='Delete'><i class='fas fa-trash'></i></button>"
-                    . "</form>";
+                // $delete = "<form method='POST' action='" . route('slider.destroy', $query->id) . "' style='display:inline-block; margin-left:6px;' onsubmit=\"return confirm('Are you sure you want to delete this slider?');\">"
+                //     . csrf_field()
+                //     . method_field('DELETE')
+                //     . "<button type='submit' class='btn btn-danger' title='Delete'><i class='fas fa-trash'></i></button>"
+                //     . "</form>";
 
                 return $edit . $delete;
             })

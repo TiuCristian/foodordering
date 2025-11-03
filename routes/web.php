@@ -16,10 +16,6 @@ use App\Http\Controllers\Frontend\UserProfileController;
 // use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-
-
-
-
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
 // Admin auth pages (only for guests)
@@ -74,11 +70,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product-gallery/{product}', [ProductGalleryController::class, 'index'])->name('product-gallery.index');
     Route::resource('product-gallery', ProductGalleryController::class);
 
-
     //Product Size Routes
     Route::get('product-size/{product}', [ProductSizeController::class, 'index'])->name('product-size.show-index');
     Route::resource('product-size', ProductSizeController::class);
 
+    //Product Options Routes
     Route::resource('product-option', ProductOptionController::class);
 });
 

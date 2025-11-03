@@ -28,16 +28,18 @@ class ProductDataTable extends DataTable
                 <i class='fas fa-edit'></i>
              </a>";
 
-                $delete = "<form action='" . route('product.destroy', $query->id) . "'
-                    method='POST'
-                    onsubmit='return confirm(\"Delete this product?\")'
-                    class='d-inline'>
-                    " . csrf_field() . "
-                    " . method_field('DELETE') . "
-                    <button type='submit' class='btn btn-danger btn-sm'>
-                        <i class='fas fa-trash'></i>
-                    </button>
-               </form>";
+                $delete = "<a href='" . route('product.destroy', $query->id) . "' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
+
+            //     $delete = "<form action='" . route('product.destroy', $query->id) . "'
+            //         method='POST'
+            //         onsubmit='return confirm(\"Delete this product?\")'
+            //         class='d-inline'>
+            //         " . csrf_field() . "
+            //         " . method_field('DELETE') . "
+            //         <button type='submit' class='btn btn-danger btn-sm'>
+            //             <i class='fas fa-trash'></i>
+            //         </button>
+            //    </form>";
 
                 $more = '<div class="btn-group dropleft d-inline">
                 <button type="button" class="btn btn-dark btn-sm dropdown-toggle"
