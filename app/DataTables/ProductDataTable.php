@@ -45,8 +45,8 @@ class ProductDataTable extends DataTable
                     <i class="fas fa-cog"></i>
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Product Gallery</a>
-                  <a class="dropdown-item" href="#">Product Variants</a>
+                  <a class="dropdown-item" href="'.route('product-gallery.show', $query->id). '">Product Gallery</a>
+                  <a class="dropdown-item" href="'.route('product-size.show-index', $query->id) . '">Product Size</a>
                 </div>
              </div>';
 
