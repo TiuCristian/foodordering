@@ -19,14 +19,6 @@ use App\Http\Controllers\Frontend\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-
-Route::get('/', [FrontendController::class, 'index'])->name('home');
-//Show Product Details Page
-Route::get('product/{slug}', [FrontendController::class, 'showProduct'])->name('product.show');
-// Route::get('product/{slug}', [FrontendController::class, 'showProduct'])
-//     ->where('slug', '^(?!create$|edit$).+')
-//     ->name('product.show');
-
 // Admin auth pages (only for guests)
 Route::prefix('admin')->name('admin.')->middleware('guest')->group(function () {
     Route::get('login', [AdminAuthController::class, 'index'])->name('login');
@@ -105,3 +97,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 require __DIR__ . '/auth.php';
+
+
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+
+//Show Product Details Page
+Route::get('product/{slug}', [FrontendController::class, 'showProduct'])->name('product.show');
+// Route::get('product/{slug}', [FrontendController::class, 'showProduct'])
+//     ->where('slug', '^(?!create$|edit$).+')
+//     ->name('product.show');
