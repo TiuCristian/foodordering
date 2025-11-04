@@ -10,6 +10,7 @@ use App\Models\WhyChooseUs;
 use App\Models\SectionTitle;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\DailyOffer;
 
 use Illuminate\Support\Collection;
 
@@ -23,11 +24,13 @@ class FrontendController extends Controller
         $sliders = Slider::where('status', 1)->get();
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
         $categories = Category::where(['show_at_home' => 1, 'status' => 1])->get();
+        $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(15)->get();
         return view('frontend.home.index', compact(
                     'sliders', 
                     'whyChooseUs', 
                     'sectionTitles', 
-                    'categories'
+                    'categories',
+                    'dailyOffers',
                 ));
     }
 

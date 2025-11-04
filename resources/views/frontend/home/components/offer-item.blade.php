@@ -14,7 +14,7 @@
         </div>
 
         <div class="row offer_item_slider wow fadeInUp" data-wow-duration="1s">
-            {{-- @foreach ($dailyOffers as $dailyOffer)
+            @foreach ($dailyOffers as $dailyOffer)
             <div class="col-xl-4">
                 <div class="fp__offer_item_single">
                     <div class="img">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            @endforeach --}}
+            @endforeach 
 
         </div>
     </div>
