@@ -69,6 +69,16 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * @property-read \App\Models\Product|null $product
+ * @method static \Illuminate\Database\Eloquent\Builder|DailyOffer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DailyOffer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DailyOffer query()
+ */
+	class DailyOffer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * @property int $id
  * @property string $area_name
  * @property string $min_delivery_time
@@ -112,6 +122,12 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category $category
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductGallery> $productImages
+ * @property-read int|null $product_images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductOption> $productOptions
+ * @property-read int|null $product_options_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductSize> $productSizes
+ * @property-read int|null $product_sizes_count
  * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
@@ -140,6 +156,94 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property int $product_id
+ * @property string $image
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductGallery whereUpdatedAt($value)
+ */
+	class ProductGallery extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $product_id
+ * @property string $name
+ * @property float $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductOption whereUpdatedAt($value)
+ */
+	class ProductOption extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $product_id
+ * @property int $rating
+ * @property string $review
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product $product
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereReview($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductRating whereUserId($value)
+ */
+	class ProductRating extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $product_id
+ * @property string $name
+ * @property float $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSize whereUpdatedAt($value)
+ */
+	class ProductSize extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string|null $key
  * @property string|null $value
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -154,6 +258,25 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SectionTitle whereValue($value)
  */
 	class SectionTitle extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $key
+ * @property string|null $value
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereValue($value)
+ */
+	class Settings extends \Eloquent {}
 }
 
 namespace App\Models{

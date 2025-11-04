@@ -64,6 +64,7 @@
                 <li><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
               </ul>
             </li>
+            <li><a class="nav-link" href="{{ route('settings.index') }}"><i class="far fa-square"></i> <span>Settings</span></a></li>
             {{-- <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
               <ul class="dropdown-menu">
@@ -73,6 +74,21 @@
               </ul>
             </li> --}}
             {{-- <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> --}}
+
+            <li class="dropdown {{ setSidebarActive([
+                'admin.category.*',
+                'admin.product.*',
+                'admin.product-reviews.index',
+            ]) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-shopping-cart"></i>
+                    <span>Manage Products </span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setSidebarActive(['admin.category.*']) }}" ><a class="nav-link" href="{{ route('category.index') }}">Product Categories</a></li>
+                    <li class="{{ setSidebarActive(['admin.product.*']) }}" ><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
+                    <li class="{{ setSidebarActive(['admin.product-reviews.index']) }}" ><a class="nav-link" href="{{ route('product-reviews.index') }}">Product Reviews</a>
+                    </li>
+                </ul>
+            </li>
           </ul>
 
         </aside>

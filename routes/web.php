@@ -9,14 +9,23 @@ use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
 use App\Http\Controllers\Admin\ProductOptionController;
+use App\Http\Controllers\Admin\ProductReviewController;
 use App\Http\Controllers\Admin\ProductSizeController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
 // use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+//Show Product Details Page
+Route::get('product/{slug}', [FrontendController::class, 'showProduct'])->name('product.show');
+// Route::get('product/{slug}', [FrontendController::class, 'showProduct'])
+//     ->where('slug', '^(?!create$|edit$).+')
+//     ->name('product.show');
 
 // Admin auth pages (only for guests)
 Route::prefix('admin')->name('admin.')->middleware('guest')->group(function () {
@@ -43,7 +52,7 @@ Route::get('/dashboard', fn() => view('dashboard'))->middleware('auth')->name('d
 
 Route::group(['middleware' => 'auth'], function () {
     
-    Route::get('dashboard',        [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('dashboard',        [DashboardController::class, 'index'])->name('dashboard');
     Route::put('profile',          [UserProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [UserProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::post('profile/avatar',  [UserProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
@@ -64,7 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('category', CategoryController::class);
     
     //Product Routes
-    Route::resource('product', ProductController::class);
+    // Route::resource('product', ProductController::class);
+    Route::resource('product', ProductController::class)->except(['show']); // drop show to avoid name clash
 
     //Product Gallery Routes
     Route::get('product-gallery/{product}', [ProductGalleryController::class, 'index'])->name('product-gallery.index');
@@ -74,8 +84,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product-size/{product}', [ProductSizeController::class, 'index'])->name('product-size.show-index');
     Route::resource('product-size', ProductSizeController::class);
 
+
     //Product Options Routes
     Route::resource('product-option', ProductOptionController::class);
+
+
+    //Settings Route
+    Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::put('/general-settings', [SettingsController::class, 'UpdateGeneralSettings'])->name('general-settings.update');
+    Route::put('/pusher-settings', [SettingsController::class, 'UpdatePusherSettings'])->name('pusher-settings.update');
+    Route::put('/mail-settings', [SettingsController::class, 'UpdateMailSettings'])->name('mail-settings.update');
+    Route::put('/logo-settings', [SettingsController::class, 'UpdateLogoSettings'])->name('logo-settings.update');
+    Route::put('/appearance-settings', [SettingsController::class, 'UpdateAppearanceSettings'])->name('appearance-settings.update');
+    Route::put('/seo-settings', [SettingsController::class, 'UpdateSeoSettings'])->name('seo-settings.update');
+
+    //Product Review Routes
+    Route::get('product-reviews', [ProductReviewController::class, 'index'])->name('product-reviews.index');
+    Route::post('product-reviews', [ProductReviewController::class, 'updateStatus'])->name('product-reviews.update');
+    Route::delete('product-reviews/{id}', [ProductReviewController::class, 'destroy'])->name('product-reviews.destroy');
 });
 
 require __DIR__ . '/auth.php';

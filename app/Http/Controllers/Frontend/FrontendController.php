@@ -8,6 +8,8 @@ use Illuminate\Contracts\View\View;
 use App\Models\Slider;
 use App\Models\WhyChooseUs;
 use App\Models\SectionTitle;
+use App\Models\Category;
+use App\Models\Product;
 
 use Illuminate\Support\Collection;
 
@@ -20,7 +22,13 @@ class FrontendController extends Controller
         $sectionTitles = $this->getSectionTitles();
         $sliders = Slider::where('status', 1)->get();
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
-        return view('frontend.home.index', compact('sliders', 'whyChooseUs', 'sectionTitles'));
+        $categories = Category::where(['show_at_home' => 1, 'status' => 1])->get();
+        return view('frontend.home.index', compact(
+                    'sliders', 
+                    'whyChooseUs', 
+                    'sectionTitles', 
+                    'categories'
+                ));
     }
 
     function getSectionTitles(): Collection
@@ -41,5 +49,22 @@ class FrontendController extends Controller
         ];
 
         return SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
+    }
+
+    function showProduct(string $slug): View
+    {
+        $product = Product::with(['productImages', 'productSizes', 'productOptions'])->where(['slug' => $slug, 'status' => 1])
+            // ->withAvg('reviews', 'rating')
+            // ->withCount('reviews')
+            ->firstOrFail();
+
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)->take(8)
+            // ->withAvg('reviews', 'rating')
+            // ->withCount('reviews')
+            ->latest()->get();
+        //  $reviews = ProductRating::where(['product_id' => $product->id, 'status' => 1])->paginate(30);
+        //  return view('frontend.pages.product-view', compact('product', 'relatedProducts', 'reviews'));
+         return view('frontend.pages.product-view', compact('product', 'relatedProducts'));
     }
 }
