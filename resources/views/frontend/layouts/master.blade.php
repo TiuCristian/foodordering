@@ -83,7 +83,6 @@
         SCROLL BUTTON END 
     ==============================-->
 
-
     <!--jquery library js-->
    
     <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
@@ -116,7 +115,7 @@
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
-    {{-- @include('frontend.layouts.global-scripts') --}}
+    @include('frontend.layouts.global-scripts')
 
         <script>
             toastr.options.progressBar = true;
@@ -136,7 +135,9 @@
             $(document).ready(function(){
                 $('.button-click').click();
             })
+
         </script>
+
 
 </body>
 

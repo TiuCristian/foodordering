@@ -29,7 +29,7 @@
     @endif
 </h4>
 
-@if ($product->productSizes()->exists())
+{{-- @if ($product->productSizes()->exists())
 <div class="details_size">
     <h5>select size</h5>
     @foreach ($product->productSizes as $productSize)
@@ -41,14 +41,58 @@
     </div>
     @endforeach
 </div>
+@endif --}}
+
+{{-- SIZES --}}
+@if ($product->productSizes()->exists())
+<div class="details_size">
+    <h5>select size</h5>
+    @foreach ($product->productSizes as $productSize)
+    <div class="form-check">
+        <input
+            class="form-check-input"
+            type="radio"
+            name="product_size"
+            id="size-{{ $productSize->id }}"
+            value="{{ $productSize->id }}"
+            data-price="{{ $productSize->price }}"
+        >
+        <label class="form-check-label" for="size-{{ $productSize->id }}">
+            {{ $productSize->name }} <span>+ {{ currencyPosition($productSize->price) }}</span>
+        </label>
+    </div>
+    @endforeach
+</div>
 @endif
 
-@if ($product->productOptions()->exists())
+{{-- @if ($product->productOptions()->exists())
 <div class="details_extra_item">
     <h5>select option <span>(optional)</span></h5>
     @foreach ($product->productOptions as $productOption)
     <div class="form-check">
         <input class="form-check-input" type="checkbox" name="product_option[]" data-price="{{ $productOption->price }}" value="{{ $productOption->id }}" id="option-{{ $productOption->id }}">
+        <label class="form-check-label" for="option-{{ $productOption->id }}">
+            {{ $productOption->name }} <span>+ {{ currencyPosition($productOption->price) }}</span>
+        </label>
+    </div>
+    @endforeach
+</div>
+@endif --}}
+
+{{-- OPTIONS --}}
+@if ($product->productOptions()->exists())
+<div class="details_extra_item">
+    <h5>select option <span>(optional)</span></h5>
+    @foreach ($product->productOptions as $productOption)
+    <div class="form-check">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            name="product_option[]"
+            id="option-{{ $productOption->id }}"
+            value="{{ $productOption->id }}"
+            data-price="{{ $productOption->price }}"
+        >
         <label class="form-check-label" for="option-{{ $productOption->id }}">
             {{ $productOption->name }} <span>+ {{ currencyPosition($productOption->price) }}</span>
         </label>
@@ -140,42 +184,6 @@
 
         }
 
-        // Add to cart function
-        $("#modal_add_to_cart_form").on('submit', function(e){
-            e.preventDefault();
-
-            // Validation
-            let selectedSize = $("input[name='product_size']");
-            if(selectedSize.length > 0){
-                if($("input[name='product_size']:checked").val() === undefined){
-                    toastr.error('Please select a size');
-                    console.error('Please select a size');
-                    return;
-                }
-            }
-
-            let formData = $(this).serialize();
-            $.ajax({
-                method: 'POST',
-                url: '{{ route("add-to-cart") }}',
-                data: formData,
-                beforeSend: function(){
-                    $('.modal_cart_button').attr('disabled', true);
-                    $('.modal_cart_button').html('<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Loading...')
-                },
-                success: function(response){
-                    updateSidebarCart();
-                    toastr.success(response.message);
-                },
-                error: function(xhr, status, error){
-                    let errorMessage = xhr.responseJSON.message;
-                    toastr.error(errorMessage);
-                },
-                complete: function(){
-                    $('.modal_cart_button').html('Add to Cart');
-                    $('.modal_cart_button').attr('disabled', false);
-                }
-            })
-        })
+       
     })
 </script>

@@ -9,7 +9,6 @@
         <div class="card card-primary">
             <div class="card-header">
                 <h4>Update Daily Offer</h4>
-
             </div>
             <div class="card-body">
                 <form action="{{ route('daily-offer.update', $dailyOffer->id) }}" method="POST" enctype="multipart/form-data">
@@ -22,7 +21,6 @@
                         </select>
                     </div>
 
-
                     <div class="form-group">
                         <label>Status</label>
                         <select name="status" class="form-control" id="">
@@ -30,7 +28,6 @@
                             <option @selected($dailyOffer->status === 0) value="0">Inactive</option>
                         </select>
                     </div>
-
 
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

@@ -74,7 +74,7 @@ class FrontendController extends Controller
     function loadProductModal($productId)
     {
         $product = Product::with(['productSizes', 'productOptions'])->findOrFail($productId);
-
         return view('frontend.layouts.ajax-files.product-popup-modal', compact('product'))->render();
     }
+  
 }

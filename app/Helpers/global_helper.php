@@ -34,6 +34,8 @@ if (!function_exists('currencyPosition')) {
     }
 }
 
+
+
 /** Calculate cart total price */
 if (!function_exists('cartTotal')) {
     function cartTotal()

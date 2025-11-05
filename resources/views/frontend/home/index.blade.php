@@ -24,9 +24,9 @@
     ==============================-->
     @include('frontend.home.components.offer-item')
 
-    <!-- CART POPUT START -->
+    <!-- CART POPUP START -->
     @include('frontend.home.components.cart-pop-up')
-    <!-- CART POPUT END -->
+    <!-- CART POPUP END -->
     <!--=============================
         OFFER ITEM END
     ==============================-->
