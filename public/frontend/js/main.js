@@ -555,4 +555,22 @@ $(function () {
         });
     }
 
+    //=======OFFER ITEM SLIDER======
+// $('.offer_item_slider').slick({
+//   slidesToShow: 3,
+//   slidesToScroll: 1,
+//   autoplay: true,
+//   autoplaySpeed: 4000,
+//   cssEase: 'linear',
+//   dots: true,
+//   arrows: false,
+//   responsive: [
+//     { breakpoint: 1400, settings: { slidesToShow: 3 } },
+//     { breakpoint: 1200, settings: { slidesToShow: 2 } },
+//     { breakpoint: 992,  settings: { slidesToShow: 1 } },
+//     { breakpoint: 768,  settings: { slidesToShow: 1 } }
+//   ]
+// });
+
+
 });

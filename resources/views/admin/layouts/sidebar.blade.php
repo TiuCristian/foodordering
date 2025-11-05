@@ -52,11 +52,14 @@
                 <span>Slider</span>
               </a>
             </li>
-              <li>
+            
               <a class="nav-link" href="{{ route('why-choose-us.index') }}">
                 <span>Why Choose Us</span>
               </a>
             </li>
+            <li class="{{ setSidebarActive(['admin.daily-offer.*']) }}"><a class="nav-link" href="{{ route('daily-offer.index') }}"><i class="far fa-clock"></i>
+                    <span>Daily Offer</span></a></li>
+              <li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Restaurant</span></a>
               <ul class="dropdown-menu">

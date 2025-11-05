@@ -116,6 +116,8 @@
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
+    {{-- @include('frontend.layouts.global-scripts') --}}
+
         <script>
             toastr.options.progressBar = true;
 

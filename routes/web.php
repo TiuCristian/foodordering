@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Admin\ProductController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
+
 // use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -94,6 +96,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product-reviews', [ProductReviewController::class, 'index'])->name('product-reviews.index');
     Route::post('product-reviews', [ProductReviewController::class, 'updateStatus'])->name('product-reviews.update');
     Route::delete('product-reviews/{id}', [ProductReviewController::class, 'destroy'])->name('product-reviews.destroy');
+
+
+    /** Daily Offer Routes */
+    Route::get('daily-offer/search-product', [DailyOfferController::class, 'productSearch'])->name('daily-offer.search-product');
+    Route::put('daily-offer-title-update', [DailyOfferController::class, 'updateTitle'])->name('daily-offer-title-update');
+    Route::resource('daily-offer', DailyOfferController::class);
 });
 
 require __DIR__ . '/auth.php';
@@ -106,3 +114,6 @@ Route::get('product/{slug}', [FrontendController::class, 'showProduct'])->name('
 // Route::get('product/{slug}', [FrontendController::class, 'showProduct'])
 //     ->where('slug', '^(?!create$|edit$).+')
 //     ->name('product.show');
+
+Route::get('/load-product-modal/{productId}', [FrontendController::class, 'loadProductModal'])
+    ->name('load-product-modal');
