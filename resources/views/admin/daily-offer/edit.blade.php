@@ -44,7 +44,7 @@
         $(document).ready(function() {
             $('#product_search').select2({
                 ajax: {
-                    url: '{{ route("admin.daily-offer.search-product") }}',
+                    url: '{{ route("daily-offer.search-product") }}',
                     data: function(params) {
                         var query = {
                             search: params.term,
