@@ -14,6 +14,7 @@ use Illuminate\View\View;
 
 use function Termwind\render;
 
+
 class DailyOfferController extends Controller
 {
     /**

@@ -117,7 +117,7 @@
     <!-- ex zoom js -->
     <script src="{{ asset('frontend/js/jquery.exzoom.js') }}"></script>
 
-     <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
 
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>

@@ -1,5 +1,8 @@
+{{-- <input type="hidden" value="{{ cartTotal() }}" id="cart_total">
+<input type="hidden" value="{{ count(Cart::content()) }}" id="cart_product_count"> --}}
+
 <input type="hidden" value="{{ cartTotal() }}" id="cart_total">
-<input type="hidden" value="{{ count(Cart::content()) }}" id="cart_product_count">
+<input type="hidden" value="{{ Cart::content()->sum('qty') }}" id="cart_product_count">
 
 @foreach (Cart::content() as $cartProduct)
     <li>
