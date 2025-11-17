@@ -115,21 +115,27 @@
                                 </div>
                             @endif
 
+                           
                             <div class="details_quentity">
                                 <h5>select quentity</h5>
                                 <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                                     <div class="quentity_btn">
-                                        <button class="btn btn-danger v_decrement"><i class="fal fa-minus"></i></button>
-                                        <input type="text" name="quantity" placeholder="1" value="1" readonly
+                                        <button type="button" class="btn btn-danger v_decrement">
+                                            <i class="fal fa-minus"></i>
+                                        </button>
+                                        <input type="text" name="quantity" placeholder="1" value="1" 
                                             id="v_quantity">
-                                        <button class="btn btn-success v_increment"><i class="fal fa-plus"></i></button>
+                                        
+                                        <button type="button" class="btn btn-success v_increment">
+                                            <i class="fal fa-plus"></i>
+                                        </button>
                                     </div>
                                     <h3 id="v_total_price">
                                         {{ $product->offer_price > 0 ? currencyPosition($product->offer_price) : currencyPosition($product->price) }}
                                     </h3>
                                 </div>
                             </div>
-                        </form> 
+                    </form> 
 
                        <ul class="details_button_area d-flex flex-wrap">
                             @if ($product->quantity === 0)
@@ -281,7 +287,7 @@
                                             @endif
                                         </h5>
                                         <ul class="d-flex flex-wrap justify-content-center">
-                                            {{-- <li><a href="javascript:;" onclick="loadProductModal('{{ $relatedProduct->id }}')"><i class="fas fa-shopping-basket"></i></a></li> --}}
+                                            <li><a href="javascript:;" onclick="loadProductModal('{{ $relatedProduct->id }}')"><i class="fas fa-shopping-basket"></i></a></li>
                                             <li><a href="#"><i class="fal fa-heart"></i></a></li>
                                             <li><a href="#"><i class="far fa-eye"></i></a></li>
                                         </ul>
@@ -297,3 +303,99 @@
     </section>
 @endsection
 
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.v_product_size').prop('checked', false);
+        $('.v_product_option').prop('checked', false);
+        $('#v_quantity').val(1);
+
+        $('.v_product_size').on('change', function() {
+            v_updateTotalPrice();
+        });
+
+        $('.v_product_option').on('change', function() {
+            v_updateTotalPrice();
+        });
+
+        $('.v_increment').on('click', function(e) {
+            e.preventDefault();
+            let quantity = $('#v_quantity');
+            let currentQuantity = parseFloat(quantity.val());
+            quantity.val(currentQuantity + 1);
+            v_updateTotalPrice();
+        });
+
+        $('.v_decrement').on('click', function(e) {
+            e.preventDefault();
+            let quantity = $('#v_quantity');
+            let currentQuantity = parseFloat(quantity.val());
+            if (currentQuantity > 1) {
+                quantity.val(currentQuantity - 1);
+                v_updateTotalPrice();
+            }
+        });
+
+        function v_updateTotalPrice() {
+            let basePrice = parseFloat($('.v_base_price').val());
+            let selectedSizePrice = 0;
+            let selectedOptionsPrice = 0;
+            let quantity = parseFloat($('#v_quantity').val());
+
+            let selectedSize = $('.v_product_size:checked');
+            if (selectedSize.length > 0) {
+                selectedSizePrice = parseFloat(selectedSize.data("price"));
+            }
+
+            let selectedOptions = $('.v_product_option:checked');
+            $(selectedOptions).each(function() {
+                selectedOptionsPrice += parseFloat($(this).data("price"));
+            });
+
+            let totalPrice = (basePrice + selectedSizePrice + selectedOptionsPrice) * quantity;
+            $('#v_total_price').text("{{ config('settings.site_currency_icon') }}" + totalPrice);
+        }
+
+        $('.v_submit_button').on('click', function(e){
+            e.preventDefault();
+            $("#v_add_to_cart_form").submit();
+        });
+
+        $("#v_add_to_cart_form").on('submit', function(e) {
+            e.preventDefault();
+
+            let selectedSize = $(".v_product_size");
+            if (selectedSize.length > 0 && $(".v_product_size:checked").val() === undefined) {
+                toastr.error('Please select a size');
+                return;
+            }
+
+            let formData = $(this).serialize();
+            $.ajax({
+                method: 'POST',
+                url: '{{ route("add-to-cart") }}',
+                data: formData,
+                beforeSend: function() {
+                    $('.v_submit_button').attr('disabled', true);
+                    $('.v_submit_button').html(
+                        '<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Loading...'
+                    );
+                },
+                success: function(response) {
+                    updateSidebarCart();
+                    toastr.success(response.message);
+                },
+                error: function(xhr) {
+                    let errorMessage = xhr.responseJSON.message;
+                    toastr.error(errorMessage);
+                },
+                complete: function() {
+                    $('.v_submit_button').html('Add to Cart');
+                    $('.v_submit_button').attr('disabled', false);
+                }
+            });
+        });
+    });
+</script>
+@endpush

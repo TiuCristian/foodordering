@@ -123,7 +123,7 @@
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
     @include('frontend.layouts.global-scripts')
-
+    @stack('scripts')
         <script>
             toastr.options.progressBar = true;
 

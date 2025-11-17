@@ -168,7 +168,6 @@
         $(document).ready(function() {
             var cartTotal = parseInt("{{ cartTotal() }}");
 
-
             $('.increment').on('click', function() {
                 let inputField = $(this).siblings(".quantity");
                 let currentValue = parseInt(inputField.val());
