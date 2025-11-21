@@ -71,6 +71,7 @@
               <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Ecommerce</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('coupon.index') }}">Coupons</a></li>
+                <li><a class="nav-link" href="{{ route('delivery-area.index') }}">Delivery Areas</a></li>
               </ul>
             </li>
             <li><a class="nav-link" href="{{ route('settings.index') }}"><i class="far fa-square"></i> <span>Settings</span></a></li>

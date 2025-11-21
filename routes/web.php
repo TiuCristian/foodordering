@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DailyOfferController;
+use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Admin\ProductController;
@@ -18,7 +19,6 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
-
 
 
 // use App\Http\Controllers\ProfileController;
@@ -89,6 +89,10 @@ Route::group(['middleware' => 'auth'], function () {
     /** Coupon Routes */
     Route::post('/apply-coupon', [FrontendController::class, 'applyCoupon'])->name('apply-coupon');
     Route::get('/destroy-coupon', [FrontendController::class, 'destroyCoupon'])->name('destroy-coupon');
+
+    /** Delivery Areas Routes */
+    Route::resource('delivery-area', DeliveryAreaController::class);
+
 
     //Product Coupons Routes
     Route::resource('coupon', CouponController::class);
