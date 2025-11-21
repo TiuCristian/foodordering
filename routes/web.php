@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
+
 
 
 // use App\Http\Controllers\ProfileController;
@@ -84,6 +86,12 @@ Route::group(['middleware' => 'auth'], function () {
     //Product Options Routes
     Route::resource('product-option', ProductOptionController::class);
 
+    /** Coupon Routes */
+    Route::post('/apply-coupon', [FrontendController::class, 'applyCoupon'])->name('apply-coupon');
+    Route::get('/destroy-coupon', [FrontendController::class, 'destroyCoupon'])->name('destroy-coupon');
+
+    //Product Coupons Routes
+    Route::resource('coupon', CouponController::class);
 
     //Settings Route
     Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
@@ -122,7 +130,6 @@ Route::get('/load-product-modal/{productId}', [FrontendController::class, 'loadP
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::get('get-cart-products', [CartController::class, 'getCartProduct'])->name('get-cart-products');
 Route::get('cart-product-remove/{rowId}', [CartController::class, 'cartProductRemove'])->name('cart-product-remove');
-
 
 
 /** Cart Page Routes */
