@@ -188,7 +188,9 @@
                         cartTotal = response.cart_total;
                         $('#subtotal').text("{{ config('settings.site_currency_icon') }}" + cartTotal);
 
-                        $("#final_total").text("{{ config('settings.site_currency_icon') }}" + response.grand_cart_total)
+                        $("#final_total").text("{{ config('settings.site_currency_icon') }}" + response.grand_cart_total);
+                         // 🔄 also refresh header/cart icon
+                        updateSidebarCart();
 
                     } else if (response.status === 'error') {
                         inputField.val(response.qty);
@@ -197,7 +199,8 @@
                 });
             });
 
-            $('.decrement').on('click', function() {
+          /*  BUGGY DECREMENT FUNC
+          $('.decrement').on('click', function() {
                 let inputField = $(this).siblings(".quantity");
                 let currentValue = parseInt(inputField.val());
                 let rowId = inputField.data("id");
@@ -227,7 +230,45 @@
 
                     });
                 }
+            }); */
+
+            $('.decrement').on('click', function() {
+                let inputField = $(this).siblings(".quantity");
+                let currentValue = parseInt(inputField.val());
+                let rowId = inputField.data("id");
+
+                // don't allow going below 1
+                if (currentValue <= 1) {
+                    return;
+                }
+
+                let newValue = currentValue - 1;
+                inputField.val(newValue);
+
+                cartQtyUpdate(rowId, newValue, function(response) {
+                    if (response.status === 'success') {
+                        inputField.val(response.qty);
+
+                        let productTotal = response.product_total;
+                        inputField.closest("tr")
+                            .find(".produt_cart_total")
+                            .text("{{ currencyPosition(':productTotal') }}"
+                                .replace(":productTotal", productTotal));
+
+                        cartTotal = response.cart_total;
+                        $('#subtotal').text("{{ config('settings.site_currency_icon') }}" + cartTotal);
+                        $("#final_total").text("{{ config('settings.site_currency_icon') }}" + response.grand_cart_total);
+
+                        // 🔄 also refresh header/cart icon
+                        updateSidebarCart();
+
+                    } else if (response.error === 'error') {
+                        inputField.val(response.qty);
+                        toastr.error(response.message);
+                    }
+                });
             });
+
 
 
             function cartQtyUpdate(rowId, qty, callback) {

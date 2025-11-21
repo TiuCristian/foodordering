@@ -114,7 +114,6 @@
                                     @endforeach
                                 </div>
                             @endif
-
                            
                             <div class="details_quentity">
                                 <h5>select quentity</h5>
